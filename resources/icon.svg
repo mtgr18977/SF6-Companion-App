@@ -1,0 +1,27 @@
+<svg width="1024" height="1024" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background - Clean rounded square like Nuvem -->
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#357ABD;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Rounded square background -->
+  <rect width="1024" height="1024" rx="180" fill="url(#bg)"/>
+  
+  <!-- SF6 Icon - Fighting fist/glove -->
+  <g transform="translate(512, 512)">
+    <!-- Stylized fist -->
+    <circle cx="0" cy="-80" r="140" fill="white" opacity="0.95"/>
+    <rect x="-60" y="-80" width="120" height="180" rx="15" fill="white" opacity="0.95"/>
+    
+    <!-- Fingers -->
+    <rect x="-70" y="-140" width="35" height="80" rx="17" fill="white" opacity="0.95"/>
+    <rect x="-25" y="-150" width="35" height="90" rx="17" fill="white" opacity="0.95"/>
+    <rect x="20" y="-140" width="35" height="80" rx="17" fill="white" opacity="0.95"/>
+    
+    <!-- SF6 Text overlay -->
+    <text x="0" y="20" font-family="Arial, sans-serif" font-size="120" font-weight="bold" fill="#357ABD" text-anchor="middle">SF6</text>
+  </g>
+</svg>

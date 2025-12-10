@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#1976d2" />
+    <title>Street Fighter 6 Companion</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        /* SF6 Vibrant Theme */
+        --primary: linear-gradient(135deg, #0066ff 0%, #00d9ff 100%);
+        --primary-solid: #0066ff;
+        --accent: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
+        --accent-solid: #ff0844;
+        --bg: #0a0e1a;
+        --bg-card: #151929;
+        --surface: #1a1f35;
+        --text-primary: #ffffff;
+        --text-secondary: #a8b2d1;
+        --glow-blue: rgba(0, 102, 255, 0.4);
+        --glow-red: rgba(255, 8, 68, 0.4);
+        --neon-cyan: #00d9ff;
+        --neon-pink: #ff0080;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.8;
+          transform: scale(0.98);
+        }
+      }
+
+      @keyframes glow {
+        0%,
+        100% {
+          box-shadow: 0 0 20px var(--glow-blue);
+        }
+        50% {
+          box-shadow: 0 0 30px var(--glow-blue), 0 0 40px var(--glow-blue);
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+        background: radial-gradient(
+            circle at 20% 50%,
+            rgba(0, 102, 255, 0.05) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(255, 8, 68, 0.05) 0%,
+            transparent 50%
+          ),
+          #0a0e1a;
+        color: var(--text-primary);
+        padding-bottom: 90px;
+        padding-top: env(safe-area-inset-top);
+        -webkit-tap-highlight-color: transparent;
+        overscroll-behavior: none;
+      }
+
+      /* Top AppBar - Fighting Game Style */
+      .app-bar {
+        position: sticky;
+        top: 0;
+        background: var(--primary);
+        color: white;
+        padding: 12px 16px;
+        padding-top: calc(12px + env(safe-area-inset-top));
+        box-shadow: 0 4px 20px rgba(0, 102, 255, 0.3),
+          0 0 40px rgba(0, 217, 255, 0.1);
+        z-index: 100;
+        border-bottom: 2px solid var(--neon-cyan);
+      }
+
+      .app-bar h1 {
+        font-size: 18px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-shadow: 0 0 10px rgba(0, 217, 255, 0.5),
+          0 2px 4px rgba(0, 0, 0, 0.5);
+        letter-spacing: 0.5px;
+      }
+
+      /* Search bar - Neon Style */
+      .search-container {
+        padding: 12px 16px;
+        background: linear-gradient(180deg, var(--bg-card) 0%, var(--bg) 100%);
+        position: sticky;
+        top: 44px;
+        z-index: 99;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+      }
+
+      .search-box {
+        display: flex;
+        align-items: center;
+        background: var(--surface);
+        border-radius: 24px;
+        padding: 10px 16px;
+        gap: 8px;
+        border: 1px solid rgba(0, 217, 255, 0.3);
+        box-shadow: 0 0 15px rgba(0, 102, 255, 0.1);
+        transition: all 0.3s;
+      }
+
+      .search-box:focus-within {
+        border-color: var(--neon-cyan);
+        box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+      }
+
+      .search-box input {
+        flex: 1;
+        border: none;
+        background: transparent;
+        font-size: 16px;
+        outline: none;
+        color: var(--text-primary);
+      }
+
+      .search-box input::placeholder {
+        color: var(--text-secondary);
+      }
+
+      .search-box .material-icons {
+        color: var(--neon-cyan);
+        font-size: 20px;
+      }
+
+      /* Filter chips - Energy Style */
+      .filter-chips {
+        display: flex;
+        gap: 8px;
+        padding: 12px 16px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(0, 102, 255, 0.05),
+          transparent
+        );
+      }
+
+      .filter-chips::-webkit-scrollbar {
+        display: none;
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 16px;
+        background: var(--surface);
+        border: 1px solid rgba(0, 217, 255, 0.2);
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 500;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: var(--text-secondary);
+      }
+
+      .chip:active {
+        transform: scale(0.95);
+      }
+
+      .chip.active {
+        background: var(--primary);
+        color: white;
+        border-color: var(--neon-cyan);
+        box-shadow: 0 0 15px var(--glow-blue), 0 4px 8px rgba(0, 0, 0, 0.2);
+        animation: pulse 2s ease-in-out infinite;
+      }
+
+      /* Content */
+      .content {
+        padding: 8px;
+      }
+
+      .section-header {
+        padding: 16px;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--neon-cyan);
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        text-shadow: 0 0 10px var(--glow-blue);
+        background: linear-gradient(90deg, rgba(0, 217, 255, 0.1), transparent);
+        border-left: 3px solid var(--neon-cyan);
+        margin: 8px;
+        border-radius: 4px;
+      }
+
+      /* Term card - Combat UI Style */
+      .term-card {
+        background: linear-gradient(
+          135deg,
+          var(--bg-card) 0%,
+          var(--surface) 100%
+        );
+        margin: 8px;
+        border-radius: 12px;
+        padding: 16px;
+        border: 1px solid rgba(0, 217, 255, 0.2);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4),
+          0 0 20px rgba(0, 102, 255, 0.05);
+        transition: all 0.3s;
+        animation: slideIn 0.4s ease-out;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .term-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--primary);
+      }
+
+      .term-card:active {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5), 0 0 30px var(--glow-blue);
+        border-color: var(--neon-cyan);
+      }
+
+      .term-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 10px;
+      }
+
+      .term-title {
+        font-size: 19px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #ffffff 0%, var(--neon-cyan) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+      }
+
+      .term-badge {
+        background: var(--accent);
+        color: white;
+        padding: 5px 10px;
+        border-radius: 12px;
+        font-size: 10px;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        box-shadow: 0 0 10px var(--glow-red), 0 2px 4px rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--neon-pink);
+      }
+
+      .term-desc {
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--text-secondary);
+        margin-bottom: 8px;
+      }
+
+      .term-example {
+        font-size: 13px;
+        color: var(--text-secondary);
+        background: rgba(0, 217, 255, 0.05);
+        padding: 10px;
+        border-radius: 6px;
+        border-left: 3px solid var(--neon-cyan);
+        margin-top: 10px;
+        box-shadow: inset 0 0 10px rgba(0, 102, 255, 0.1);
+      }
+
+    
+    /* Frame Data Table - Cyber Style */
+    .frame-data-section {
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--surface) 100%);
+      margin: 8px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 217, 255, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 102, 255, 0.05);
+    }
+    
+    .section-title {
+      padding: 16px;
+      font-size: 18px;
+      font-weight: 700;
+      background: var(--primary);
+      color: white;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+    }
+    
+    .table-container {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+    
+    th {
+      background: var(--surface);
+      padding: 12px 8px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--neon-cyan);
+      position: sticky;
+      top: 0;
+      white-space: nowrap;
+      text-transform: uppercase;
+      font-size: 11px;
+      letter-spacing: 0.5px;
+      border-bottom: 2px solid var(--neon-cyan);
+    }
+    
+    td {
+      padding: 12px 8px;
+      border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+      color: var(--text-secondary);
+    }
+    
+    tr:hover {
+      background: rgba(0, 217, 255, 0.05);
+    }
+    
+    .empty-state {
+      padding: 48px 24px;
+      text-align: center;
+      color: var(--text-secondary);
+    }
+    
+    .empty-state .material-icons {
+      font-size: 64px;
+      color: rgba(0, 217, 255, 0.2);
+      margin-bottom: 16px;
+    }
+    
+    /* Bottom Nav - Arcade Style */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--bg-card) 100%);
+      display: flex;
+      justify-content: space-around;
+      border-top: 2px solid var(--neon-cyan);
+      z-index: 100;
+      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 102, 255, 0.1);
+    }
+    
+    .nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 10px 12px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.3s;
+      min-height: 64px;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .nav-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--primary);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    
+    .nav-item.active {
+      color: var(--neon-cyan);
+    }
+    
+    .nav-item.active::before {
+      transform: scaleX(1);
+    }
+    
+    .nav-item:active {
+      transform: scale(0.95);
+      background: rgba(0, 217, 255, 0.05);
+    }
+    
+    .nav-item .material-icons {
+      font-size: 26px;
+      margin-bottom: 4px;
+      filter: drop-shadow(0 0 4px currentColor);
+    }
+    
+    .nav-item span {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+    }
+    
+    /* Hidden sections */
+    .section {
+      display: none;
+    }
+    
+    .section.active {
+      display: block;
+    }
+    
+    /* Floating action button */
+    .fab {
+      position: fixed;
+      right: 16px;
+      bottom: 80px;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      border: 2px solid var(--neon-pink);
+      box-shadow: 0 6px 16px rgba(255, 8, 68, 0.4), 0 0 20px var(--glow-red);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 90;
+      transition: all 0.3s;
+      transform: scale(0.9);
+      box-shadow: 0 8px 20px rgba(255, 8, 68, 0.5), 0 0 30px var(--glow-red);
+    }
+    </style>
+  </head>
+  <body>
+    <!-- App Bar -->
+    <div class="app-bar">
+      <h1>
+        <span class="material-icons">sports_kabaddi</span>
+        Street Fighter 6 Companion
+      </h1>
+    </div>
+
+    <!-- Search -->
+    <div class="search-container">
+      <div class="search-box">
+        <span class="material-icons">search</span>
+        <input
+          type="text"
+          id="search"
+          placeholder="Buscar termo ou personagem..."
+        />
+        <span
+          class="material-icons"
+          id="clear-search"
+          style="cursor: pointer; display: none"
+          >close</span
+        >
+      </div>
+    </div>
+
+    <!-- Filter Chips -->
+    <div class="filter-chips">
+      <div class="chip active" data-filter="all">Todos</div>
+      <div class="chip" data-filter="essential">Essenciais</div>
+      <div class="chip" data-section="fundamentos">Fundamentos</div>
+      <div class="chip" data-section="frames">Frames</div>
+      <div class="chip" data-section="defesa">Defesa</div>
+      <div class="chip" data-section="ataque">Ataque</div>
+      <div class="chip" data-section="sf6">SF6</div>
+    </div>
+
+    <!-- Glossary Section -->
+    <div id="glossary-view" class="section active">
+      <div class="content" id="terms-container">
+        <!-- Terms rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Frame Data Section -->
+    <div id="framedata-view" class="section">
+      <div class="search-container" style="position: sticky; top: 112px">
+        <div class="search-box">
+          <span class="material-icons">search</span>
+          <input
+            type="text"
+            id="fd-search"
+            placeholder="Digite um personagem (Ryu, Ken...)"
+          />
+        </div>
+      </div>
+
+      <div class="frame-data-section">
+        <div class="table-container">
+          <table id="fd-table">
+            <thead>
+              <tr>
+                <th>Char</th>
+                <th>Move</th>
+                <th>Input</th>
+                <th>Startup</th>
+                <th>On Block</th>
+              </tr>
+            </thead>
+            <tbody id="fd-body"></tbody>
+          </table>
+        </div>
+        <div id="fd-empty" class="empty-state">
+          <span class="material-icons">search_off</span>
+          <p>Digite um personagem para ver os dados</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+      <a href="#" class="nav-item active" data-view="glossary">
+        <span class="material-icons">menu_book</span>
+        <span>Termos</span>
+      </a>
+      <a href="#" class="nav-item" data-view="framedata">
+        <span class="material-icons">table_chart</span>
+        <span>Frame Data</span>
+      </a>
+    </nav>
+
+    <script src="sf6-frame-data.js"></script>
+    <script>
+      // Terms data
+      const termsData = [
+        {
+          id: "footsies",
+          category: "fundamentos",
+          title: "Footsies",
+          essential: true,
+          desc: "Jogo neutro: controle de espaço com normais para ganhar posição e criar oportunidades.",
+          example:
+            "Ex.: usar cr.MK para manter distância segura e pescar um whiff do adversário.",
+        },
+        {
+          id: "neutral",
+          category: "fundamentos",
+          title: "Neutral",
+          essential: true,
+          desc: "Situação onde nenhum jogador tem vantagem — ambos buscam criar oportunidades.",
+        },
+        {
+          id: "antiair",
+          category: "fundamentos",
+          title: "Anti-air (AA)",
+          essential: true,
+          desc: "Golpe usado para punir ou deter pulo do oponente.",
+        },
+        {
+          id: "poke",
+          category: "fundamentos",
+          title: "Poke",
+          essential: false,
+          desc: "Normal rápido e seguro usado para controlar distância e punir erros.",
+        },
+        {
+          id: "whiff",
+          category: "fundamentos",
+          title: "Whiff",
+          essential: true,
+          desc: "Quando um ataque erra no vazio; deixa o atacante vulnerável.",
+        },
+        {
+          id: "whiffpunish",
+          category: "fundamentos",
+          title: "Whiff punish",
+          essential: true,
+          desc: "Punir um golpe que whiffou, entrando com um ataque rápido ou combo.",
+        },
+        {
+          id: "shimmy",
+          category: "fundamentos",
+          title: "Shimmy",
+          essential: true,
+          desc: "Técnica de bait que força o oponente a tentar throw tech e whiffar, para então punir.",
+          example:
+            "Ex.: andar pra frente, recuar um passo curto; se o oponente apertar tech, whiff → punish.",
+        },
+        {
+          id: "framedata",
+          category: "frames",
+          title: "Frame data",
+          essential: true,
+          desc: "Informações sobre startup, active e recovery — essenciais para saber o que é punishable.",
+        },
+        {
+          id: "startup",
+          category: "frames",
+          title: "Startup / Active / Recovery",
+          essential: true,
+          desc: "Startup: frames antes do golpe sair. Active: frames que podem acertar. Recovery: frames até voltar ao neutro.",
+        },
+        {
+          id: "plusminus",
+          category: "frames",
+          title: "Plus/Minus on block",
+          essential: true,
+          desc: "Indica vantagem (+ frames) ou desvantagem (- frames) quando um golpe é bloqueado.",
+        },
+        {
+          id: "punishable",
+          category: "frames",
+          title: "Punishable",
+          essential: true,
+          desc: "Golpe que pode ser punido após ser bloqueado — usar frame data para identificar.",
+        },
+        {
+          id: "tickthrow",
+          category: "defesa",
+          title: "Tick throw",
+          essential: false,
+          desc: "Pressão usando golpe leve seguido de agarrão rápido para abrir defesa.",
+        },
+        {
+          id: "throwtech",
+          category: "defesa",
+          title: "Throw tech",
+          essential: true,
+          desc: "Defesa contra agarrão (LP+LK). Pode whiffar se mal-timed — explorável com shimmy.",
+        },
+        {
+          id: "crossup",
+          category: "defesa",
+          title: "Cross-up / Overhead / Low",
+          essential: true,
+          desc: "Cross-up: bate por trás. Overhead: acertar em pé. Low: acertar agachado — mistura para quebrar defesa.",
+        },
+        {
+          id: "pressure",
+          category: "defesa",
+          title: "Pressure / Blockstring",
+          essential: true,
+          desc: "Sequência de ataques para manter o oponente defendendo; seu timing define se é seguro.",
+        },
+        {
+          id: "hitconfirm",
+          category: "ataque",
+          title: "Hit confirm",
+          essential: true,
+          desc: "Observar o acerto do golpe e então converter em combo; evita punir por tentar combo em block.",
+        },
+        {
+          id: "meaty",
+          category: "ataque",
+          title: "Meaty / Okizeme / Reset",
+          essential: true,
+          desc: "Meaty: atacar no momento que o oponente levanta. Okizeme: pressão pós-knockdown. Reset: interromper combo para mix-up.",
+        },
+        {
+          id: "di",
+          category: "sf6",
+          title: "Drive Impact (DI)",
+          essential: true,
+          desc: "Ataque ofensivo com propriedades especiais (absorve hits ou causa parede); uso arriscado se lido pelo oponente.",
+        },
+        {
+          id: "dr",
+          category: "sf6",
+          title: "Drive Rush (DR)",
+          essential: true,
+          desc: "Cancelamento que dá forte vantagem de frames e permite pressão estendida.",
+        },
+        {
+          id: "parry",
+          category: "sf6",
+          title: "Drive Parry / Perfect Parry",
+          essential: true,
+          desc: "Defesa ativa com redução de dano; Perfect Parry oferece oportunidades de punir com alto ganho.",
+        },
+      ];
+
+      // Render terms
+      function renderTerms(filter = {}) {
+        const container = document.getElementById("terms-container");
+        container.innerHTML = "";
+
+        let filtered = termsData;
+
+        if (filter.essential) filtered = filtered.filter((t) => t.essential);
+        if (filter.category)
+          filtered = filtered.filter((t) => t.category === filter.category);
+        if (filter.search) {
+          const q = filter.search.toLowerCase();
+          filtered = filtered.filter(
+            (t) =>
+              t.title.toLowerCase().includes(q) ||
+              t.desc.toLowerCase().includes(q)
+          );
+        }
+
+        if (filtered.length === 0) {
+          container.innerHTML =
+            '<div class="empty-state"><span class="material-icons">search_off</span><p>Nenhum termo encontrado</p></div>';
+          return;
+        }
+
+        let currentCat = "";
+        filtered.forEach((term) => {
+          if (term.category !== currentCat && !filter.search) {
+            currentCat = term.category;
+            const catNames = {
+              fundamentos: "Fundamentos",
+              frames: "Frames e Segurança",
+              defesa: "Defesa e Pressão",
+              ataque: "Ataque e Combos",
+              sf6: "Específicos SF6",
+            };
+            container.innerHTML += `<div class="section-header">${
+              catNames[currentCat] || currentCat
+            }</div>`;
+          }
+
+          container.innerHTML += `
+          <div class="term-card" data-id="${term.id}">
+            <div class="term-header">
+              <div class="term-title">${term.title}</div>
+              ${term.essential ? '<div class="term-badge">Essencial</div>' : ""}
+            </div>
+            <div class="term-desc">${term.desc}</div>
+            ${
+              term.example
+                ? `<div class="term-example">${term.example}</div>`
+                : ""
+            }
+          </div>
+        `;
+        });
+      }
+
+      // Initial render
+      renderTerms();
+
+      // Search
+      let searchTimeout;
+      document.getElementById("search").addEventListener("input", (e) => {
+        const val = e.target.value.trim();
+        document.getElementById("clear-search").style.display = val
+          ? "block"
+          : "none";
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(() => renderTerms({ search: val }), 300);
+      });
+
+      document.getElementById("clear-search").addEventListener("click", () => {
+        document.getElementById("search").value = "";
+        document.getElementById("clear-search").style.display = "none";
+        renderTerms();
+      });
+
+      // Filter chips
+      document.querySelectorAll(".chip").forEach((chip) => {
+        chip.addEventListener("click", function () {
+          document
+            .querySelectorAll(".chip")
+            .forEach((c) => c.classList.remove("active"));
+          this.classList.add("active");
+
+          const filter = this.dataset.filter;
+          const section = this.dataset.section;
+
+          if (filter === "all") renderTerms();
+          else if (filter === "essential") renderTerms({ essential: true });
+          else if (section) renderTerms({ category: section });
+        });
+      });
+
+      //Bottom nav
+      document.querySelectorAll(".nav-item").forEach((item) => {
+        item.addEventListener("click", function (e) {
+          e.preventDefault();
+          document
+            .querySelectorAll(".nav-item")
+            .forEach((i) => i.classList.remove("active"));
+          this.classList.add("active");
+
+          const view = this.dataset.view;
+          document
+            .querySelectorAll(".section")
+            .forEach((s) => s.classList.remove("active"));
+          document.getElementById(view + "-view").classList.add("active");
+        });
+      });
+
+      // Frame Data
+      function renderFrameData(query) {
+        if (typeof SF6_FRAME_DATA === "undefined") return;
+
+        const tbody = document.getElementById("fd-body");
+        const empty = document.getElementById("fd-empty");
+        tbody.innerHTML = "";
+
+        if (!query || query.trim() === "") {
+          empty.style.display = "block";
+          return;
+        }
+
+        empty.style.display = "none";
+        const q = query.toLowerCase();
+        let count = 0;
+
+        for (const [char, moves] of Object.entries(SF6_FRAME_DATA)) {
+          const charName = char.charAt(0).toUpperCase() + char.slice(1);
+          if (charName.toLowerCase().includes(q)) {
+            moves.slice(0, 50).forEach((m) => {
+              tbody.innerHTML += `<tr>
+              <td>${charName}</td>
+              <td>${m.name}</td>
+              <td>${m.input}</td>
+              <td>${m.startup}</td>
+              <td style="color:${
+                m.onBlock > 0
+                  ? "#4caf50"
+                  : m.onBlock < -2
+                  ? "#f44336"
+                  : "inherit"
+              }">${m.onBlock}</td>
+            </tr>`;
+            });
+            count++;
+          }
+          if (count >= 3) break;
+        }
+
+        if (tbody.innerHTML === "") {
+          empty.style.display = "block";
+          empty.querySelector("p").textContent = "Nenhum personagem encontrado";
+        }
+      }
+
+      let fdTimeout;
+      document.getElementById("fd-search").addEventListener("input", (e) => {
+        clearTimeout(fdTimeout);
+        fdTimeout = setTimeout(() => renderFrameData(e.target.value), 300);
+      });
+    </script>
+  </body>
+</html>
