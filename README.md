@@ -100,6 +100,87 @@ cd android
 
 The AAB file will be located at `android/app/build/outputs/bundle/release/`
 
+## Publishing to F-Droid
+
+F-Droid is a catalog of FOSS (Free and Open Source Software) applications for Android. To submit your app:
+
+### Prerequisites
+
+1. **Make your app fully open source**: All code, assets, and dependencies must be FOSS-compatible
+2. **Remove proprietary dependencies**: F-Droid only accepts apps that can be built entirely from source with FOSS tools
+3. **Use a FOSS license**: Your LICENSE file should be GPL, Apache, MIT, or another FOSS-approved license
+
+### Submission Process
+
+1. **Prepare your repository**:
+   - Ensure all source code is in a public Git repository (GitHub, GitLab, etc.)
+   - Add proper version tags (e.g., `v1.0.0`, `v1.1.0`)
+   - Include clear build instructions
+
+2. **Create metadata**:
+   - Fork the [F-Droid Data repository](https://gitlab.com/fdroid/fdroiddata)
+   - Create a metadata file for your app in `metadata/com.example.app.yml`
+
+3. **Metadata file example**:
+```yaml
+Categories:
+  - Games
+  - Sports
+License: ISC
+AuthorName: Your Name
+AuthorEmail: your.email@example.com
+SourceCode: https://github.com/yourusername/SF6-Companion-App
+IssueTracker: https://github.com/yourusername/SF6-Companion-App/issues
+
+AutoName: Street Fighter 6 Companion
+
+RepoType: git
+Repo: https://github.com/yourusername/SF6-Companion-App
+
+Builds:
+  - versionName: '1.0.0'
+    versionCode: 1
+    commit: v1.0.0
+    subdir: android/app
+    gradle:
+      - yes
+
+AutoUpdateMode: Version v%v
+UpdateCheckMode: Tags
+CurrentVersion: 1.0.0
+CurrentVersionCode: 1
+```
+
+4. **Submit a merge request**:
+   - Commit your metadata file to your forked repository
+   - Create a merge request to the F-Droid Data repository
+   - Include a clear description of your app
+
+5. **Wait for review**:
+   - F-Droid maintainers will review your submission
+   - They may request changes or clarifications
+   - The review process can take several weeks
+
+### Important Considerations
+
+- **Capcom Assets**: If your app uses Capcom's copyrighted assets (character images, logos, etc.), it may not be accepted by F-Droid due to licensing concerns
+- **Frame Data**: Ensure frame data is either original research or properly licensed
+- **Reproducible Builds**: F-Droid builds apps from source, so your build must be reproducible
+
+### Alternative: F-Droid Repository
+
+If your app doesn't meet F-Droid's strict requirements, you can create your own F-Droid repository:
+
+1. Set up a simple repository with your APK files
+2. Users can add your repository URL to their F-Droid client
+3. Documentation: https://f-droid.org/docs/Setup_an_F-Droid_App_Repo/
+
+### Useful Links
+
+- [F-Droid Submission Guidelines](https://f-droid.org/docs/Inclusion_Policy/)
+- [F-Droid Build Metadata Reference](https://f-droid.org/docs/Build_Metadata_Reference/)
+- [F-Droid Data Repository](https://gitlab.com/fdroid/fdroiddata)
+
 ## Frame Data
 
 The app includes comprehensive frame data for all Street Fighter 6 characters, including:

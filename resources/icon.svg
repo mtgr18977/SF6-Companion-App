@@ -1,27 +1,64 @@
 <svg width="1024" height="1024" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background - Clean rounded square like Nuvem -->
+  <!-- One UI Style Icon for SF6 Companion -->
+  
   <defs>
-    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#4A90E2;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#357ABD;stop-opacity:1" />
+    <!-- Main gradient - vibrant blue to cyan -->
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0066FF;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00D9FF;stop-opacity:1" />
     </linearGradient>
+    
+    <!-- Subtle shadow for depth -->
+    <filter id="shadow">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+      <feOffset dx="0" dy="2" result="offsetblur"/>
+      <feComponentTransfer>
+        <feFuncA type="linear" slope="0.3"/>
+      </feComponentTransfer>
+      <feMerge>
+        <feMergeNode/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
   </defs>
   
-  <!-- Rounded square background -->
-  <rect width="1024" height="1024" rx="180" fill="url(#bg)"/>
+  <!-- Rounded square background - One UI style -->
+  <rect width="1024" height="1024" rx="227" fill="url(#bgGradient)"/>
   
-  <!-- SF6 Icon - Fighting fist/glove -->
-  <g transform="translate(512, 512)">
-    <!-- Stylized fist -->
-    <circle cx="0" cy="-80" r="140" fill="white" opacity="0.95"/>
-    <rect x="-60" y="-80" width="120" height="180" rx="15" fill="white" opacity="0.95"/>
+  <!-- Main icon content centered -->
+  <g transform="translate(512, 400)">
+    <!-- Minimalist fist icon - bold and geometric -->
+    <!-- Thumb -->
+    <path d="M -140 60 L -140 -20 Q -140 -40 -120 -40 L -80 -40 Q -60 -40 -60 -20 L -60 20 Z" 
+          fill="white" opacity="0.95"/>
     
-    <!-- Fingers -->
-    <rect x="-70" y="-140" width="35" height="80" rx="17" fill="white" opacity="0.95"/>
-    <rect x="-25" y="-150" width="35" height="90" rx="17" fill="white" opacity="0.95"/>
-    <rect x="20" y="-140" width="35" height="80" rx="17" fill="white" opacity="0.95"/>
+    <!-- Index finger -->
+    <rect x="-60" y="-120" width="50" height="140" rx="25" fill="white" opacity="0.95"/>
     
-    <!-- SF6 Text overlay -->
-    <text x="0" y="20" font-family="Arial, sans-serif" font-size="120" font-weight="bold" fill="#357ABD" text-anchor="middle">SF6</text>
+    <!-- Middle finger -->
+    <rect x="-5" y="-140" width="50" height="160" rx="25" fill="white" opacity="0.95"/>
+    
+    <!-- Ring finger -->
+    <rect x="50" y="-130" width="50" height="150" rx="25" fill="white" opacity="0.95"/>
+    
+    <!-- Pinky finger -->
+    <rect x="105" y="-110" width="45" height="130" rx="22" fill="white" opacity="0.95"/>
+    
+    <!-- Palm - connects all -->
+    <ellipse cx="20" cy="20" rx="130" ry="95" fill="white" opacity="0.95"/>
+    
+    <!-- Wrist/base -->
+    <rect x="-70" y="60" width="180" height="85" rx="25" fill="white" opacity="0.95"/>
+  </g>
+  
+  <!-- SF6 Text - Bold and clean -->
+  <g transform="translate(512, 720)" filter="url(#shadow)">
+    <text x="0" y="0" 
+          font-family="Arial, Helvetica, sans-serif" 
+          font-size="160" 
+          font-weight="900" 
+          fill="white" 
+          text-anchor="middle"
+          letter-spacing="4">SF6</text>
   </g>
 </svg>

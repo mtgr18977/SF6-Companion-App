@@ -316,173 +316,625 @@
         box-shadow: inset 0 0 10px rgba(0, 102, 255, 0.1);
       }
 
+      /* Frame Data Table - Cyber Style */
+      .frame-data-section {
+        background: linear-gradient(
+          135deg,
+          var(--bg-card) 0%,
+          var(--surface) 100%
+        );
+        margin: 8px;
+        border-radius: 12px;
+        overflow: hidden;
+        border: 1px solid rgba(0, 217, 255, 0.2);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4),
+          0 0 20px rgba(0, 102, 255, 0.05);
+      }
+
+      .section-title {
+        padding: 16px;
+        font-size: 18px;
+        font-weight: 700;
+        background: var(--primary);
+        color: white;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+      }
+
+      .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+
+      th {
+        background: var(--surface);
+        padding: 12px 8px;
+        text-align: left;
+        font-weight: 600;
+        color: var(--neon-cyan);
+        position: sticky;
+        top: 0;
+        white-space: nowrap;
+        text-transform: uppercase;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        border-bottom: 2px solid var(--neon-cyan);
+      }
+
+      td {
+        padding: 12px 8px;
+        border-bottom: 1px solid rgba(0, 217, 255, 0.1);
+        color: var(--text-secondary);
+      }
+
+      tr:hover {
+        background: rgba(0, 217, 255, 0.05);
+      }
+
+      .empty-state {
+        padding: 48px 24px;
+        text-align: center;
+        color: var(--text-secondary);
+      }
+
+      .empty-state .material-icons {
+        font-size: 64px;
+        color: rgba(0, 217, 255, 0.2);
+        margin-bottom: 16px;
+      }
+
+      /* Bottom Nav - Arcade Style */
+      .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(
+          180deg,
+          var(--surface) 0%,
+          var(--bg-card) 100%
+        );
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        border-top: 2px solid var(--neon-cyan);
+        z-index: 100;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5),
+          0 0 30px rgba(0, 102, 255, 0.1);
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      
+      .bottom-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav-item {
+        flex: 0 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px 16px;
+        color: var(--text-secondary);
+        text-decoration: none;
+        transition: all 0.3s;
+        min-height: 64px;
+        min-width: 70px;
+        justify-content: center;
+        position: relative;
+      }
+
+      .nav-item::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: var(--primary);
+        transform: scaleX(0);
+        transition: transform 0.3s;
+      }
+
+      .nav-item.active {
+        color: var(--neon-cyan);
+      }
+
+      .nav-item.active::before {
+        transform: scaleX(1);
+      }
+
+      .nav-item:active {
+        transform: scale(0.95);
+        background: rgba(0, 217, 255, 0.05);
+      }
+
+      .nav-item .material-icons {
+        font-size: 22px;
+        margin-bottom: 4px;
+        filter: drop-shadow(0 0 4px currentColor);
+      }
+
+      .nav-item span {
+        font-size: 9px;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+
+      /* Hidden sections */
+      .section {
+        display: none;
+      }
+
+      .section.active {
+        display: block;
+      }
+
+      /* Floating action button */
+      .fab {
+        position: fixed;
+        right: 16px;
+        bottom: 80px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: var(--accent);
+        color: white;
+        border: 2px solid var(--neon-pink);
+        box-shadow: 0 6px 16px rgba(255, 8, 68, 0.4), 0 0 20px var(--glow-red);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 90;
+        transition: all 0.3s;
+        transform: scale(0.9);
+        box-shadow: 0 8px 20px rgba(255, 8, 68, 0.5), 0 0 30px var(--glow-red);
+      }
     
-    /* Frame Data Table - Cyber Style */
-    .frame-data-section {
+    /* Frame Calculator Styles */
+    .calculator-card {
       background: linear-gradient(135deg, var(--bg-card) 0%, var(--surface) 100%);
-      margin: 8px;
+      margin: 16px;
       border-radius: 12px;
-      overflow: hidden;
+      padding: 20px;
       border: 1px solid rgba(0, 217, 255, 0.2);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 102, 255, 0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
     
-    .section-title {
-      padding: 16px;
-      font-size: 18px;
+    .calc-label {
+      font-size: 16px;
       font-weight: 700;
-      background: var(--primary);
-      color: white;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
-    }
-    
-    .table-container {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-    }
-    
-    th {
-      background: var(--surface);
-      padding: 12px 8px;
-      text-align: left;
-      font-weight: 600;
       color: var(--neon-cyan);
-      position: sticky;
-      top: 0;
-      white-space: nowrap;
-      text-transform: uppercase;
-      font-size: 11px;
-      letter-spacing: 0.5px;
-      border-bottom: 2px solid var(--neon-cyan);
-    }
-    
-    td {
-      padding: 12px 8px;
-      border-bottom: 1px solid rgba(0, 217, 255, 0.1);
-      color: var(--text-secondary);
-    }
-    
-    tr:hover {
-      background: rgba(0, 217, 255, 0.05);
-    }
-    
-    .empty-state {
-      padding: 48px 24px;
-      text-align: center;
-      color: var(--text-secondary);
-    }
-    
-    .empty-state .material-icons {
-      font-size: 64px;
-      color: rgba(0, 217, 255, 0.2);
-      margin-bottom: 16px;
-    }
-    
-    /* Bottom Nav - Arcade Style */
-    .bottom-nav {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      background: linear-gradient(180deg, var(--surface) 0%, var(--bg-card) 100%);
-      display: flex;
-      justify-content: space-around;
-      border-top: 2px solid var(--neon-cyan);
-      z-index: 100;
-      box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 102, 255, 0.1);
-    }
-    
-    .nav-item {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 10px 12px;
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: all 0.3s;
-      min-height: 64px;
-      justify-content: center;
-      position: relative;
-    }
-    
-    .nav-item::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      background: var(--primary);
-      transform: scaleX(0);
-      transition: transform 0.3s;
-    }
-    
-    .nav-item.active {
-      color: var(--neon-cyan);
-    }
-    
-    .nav-item.active::before {
-      transform: scaleX(1);
-    }
-    
-    .nav-item:active {
-      transform: scale(0.95);
-      background: rgba(0, 217, 255, 0.05);
-    }
-    
-    .nav-item .material-icons {
-      font-size: 26px;
-      margin-bottom: 4px;
-      filter: drop-shadow(0 0 4px currentColor);
-    }
-    
-    .nav-item span {
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.3px;
-      text-transform: uppercase;
-    }
-    
-    /* Hidden sections */
-    .section {
-      display: none;
-    }
-    
-    .section.active {
+      margin-bottom: 12px;
       display: block;
     }
     
-    /* Floating action button */
-    .fab {
-      position: fixed;
-      right: 16px;
-      bottom: 80px;
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--accent);
+    .calc-inputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+    
+    .input-group {
+      position: relative;
+    }
+    
+    .input-group label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .input-group input {
+      width: 100%;
+      padding: 12px;
+      padding-right: 30px;
+      background: var(--bg);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 18px;
+      font-weight: 700;
+      text-align: center;
+    }
+    
+    .input-group input:focus {
+      outline: none;
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+    }
+    
+    .input-suffix {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    
+    .calc-divider {
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+      margin: 20px 0;
+    }
+    
+    .calc-button, .calc-button-secondary {
+      width: 100%;
+      padding: 14px;
+      margin-top: 16px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    
+    .calc-button {
+      background: var(--primary);
       color: white;
-      border: 2px solid var(--neon-pink);
-      box-shadow: 0 6px 16px rgba(255, 8, 68, 0.4), 0 0 20px var(--glow-red);
+      box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+    }
+    
+    .calc-button:active {
+      transform: scaleY(0.98);
+    }
+    
+    .calc-button-secondary {
+      background: var(--surface);
+      color: var(--text-secondary);
+      border: 1px solid rgba(0, 217, 255, 0.2);
+    }
+    
+    .calc-result {
+      margin-top: 24px;
+      padding: 20px;
+      background: var(--bg);
+      border-radius: 12px;
+      border: 2px solid var(--neon-cyan);
+      animation: slideIn 0.3s ease-out;
+    }
+    
+    .result-content {
+      text-align: center;
+    }
+    
+    .result-icon {
+      font-size: 48px;
+      margin-bottom: 12px;
+    }
+    
+    .result-text {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    
+    .result-explanation {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    
+    .calc-help {
+      margin: 16px;
+      padding: 16px;
+      background: rgba(0, 217, 255, 0.05);
+      border-radius: 8px;
+      border-left: 3px solid var(--neon-cyan);
+    }
+    
+    .calc-help p {
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    /* Combo Trials Styles */
+    .char-list-item {
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--surface) 100%);
+      margin: 8px 16px;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 217, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .char-list-item:active {
+      transform: translateY(-2px);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 6px 20px rgba(0, 102, 255, 0.3);
+    }
+    
+    .char-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--primary);
       display: flex;
       align-items: center;
       justify-content: center;
-      z-index: 90;
-      transition: all 0.3s;
-      transform: scale(0.9);
-      box-shadow: 0 8px 20px rgba(255, 8, 68, 0.5), 0 0 30px var(--glow-red);
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
     }
-    </style>
+    
+    .char-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+      flex: 1;
+    }
+    
+    .char-combo-count {
+      font-size: 13px;
+      color: var(--text-secondary);
+      padding: 4px 12px;
+      background: var(--bg);
+      border-radius: 12px;
+    }
+    
+    .combo-card {
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--surface) 100%);
+      margin: 8px 16px;
+      padding: 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 217, 255, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+    
+    .combo-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    
+    .combo-name {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--neon-cyan);
+    }
+    
+    .combo-difficulty {
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .difficulty-beginner {
+      background: rgba(76, 175, 80, 0.2);
+      color: #4caf50;
+      border: 1px solid #4caf50;
+    }
+    
+    .difficulty-intermediate {
+      background: rgba(255, 193, 7, 0.2);
+      color: #ffc107;
+      border: 1px solid #ffc107;
+    }
+    
+    .difficulty-advanced {
+      background: rgba(244, 67, 54, 0.2);
+      color: #f44336;
+      border: 1px solid #f44336;
+    }
+    
+    .combo-notation {
+      font-size: 15px;
+      color: var(--text-primary);
+      font-family: monospace;
+      padding: 12px;
+      background: var(--bg);
+      border-radius: 8px;
+      margin: 12px 0;
+      border-left: 3px solid var(--neon-cyan);
+    }
+    
+    .combo-stats {
+      display: flex;
+      gap: 16px;
+      margin: 12px 0;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    
+    .combo-stat {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    
+    .combo-notes {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+    
+    /* Matchup Helper Styles */
+    .selector-card {
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--surface) 100%);
+      margin: 16px;
+      padding: 24px;
+      border-radius: 12px;
+      border: 1px solid rgba(0, 217, 255, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    }
+    
+    .selector-group {
+      margin-bottom: 20px;
+    }
+    
+    .selector-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .char-select {
+      width: 100%;
+      padding: 14px;
+      background: var(--bg);
+      border: 1px solid rgba(0, 217, 255, 0.3);
+      border-radius: 8px;
+      color: var(--text-primary);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    
+    .char-select:focus {
+      outline: none;
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(0, 217, 255, 0.3);
+    }
+    
+    .vs-divider {
+      text-align: center;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--accent-solid);
+      margin: 16px 0;
+      text-shadow: 0 0 10px var(--glow-red);
+    }
+    
+    .matchup-button {
+      width: 100%;
+      padding: 14px;
+      background: var(--primary);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+    }
+    
+    .matchup-button:active {
+      transform: scale(0.98);
+    }
+    
+    .matchup-result {
+      margin: 16px;
+      animation: slideIn 0.3s ease-out;
+    }
+    
+    .matchup-header {
+      background: var(--primary);
+      padding: 20px;
+      border-radius: 12px 12px 0 0;
+      text-align: center;
+    }
+    
+    .matchup-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 12px;
+      text-shadow: 0 0 10px rgba(0, 217, 255, 0.5);
+    }
+    
+    .difficulty-bar {
+      display: flex;
+      gap: 4px;
+      justify-content: center;
+      margin-top: 12px;
+    }
+    
+    .difficulty-dot {
+      width: 24px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+    }
+    
+    .difficulty-dot.filled {
+      background: white;
+    }
+    
+    .matchup-section {
+      background: linear-gradient(135deg, var(--bg-card) 0%, var(--surface) 100%);
+      padding: 20px;
+      border-left: 1px solid rgba(0, 217, 255, 0.2);
+      border-right: 1px solid rgba(0, 217, 255, 0.2);
+    }
+    
+    .matchup-section:last-child {
+      border-radius: 0 0 12px 12px;
+      border-bottom: 1px solid rgba(0, 217, 255, 0.2);
+    }
+    
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .matchup-section ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .matchup-section li {
+      padding: 8px 0;
+      padding-left: 20px;
+      position: relative;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    
+    .matchup-section li:before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--neon-cyan);
+      font-weight: 700;
+    }
+    
+    .strategy-text {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+  </style>
   </head>
   <body>
     <!-- App Bar -->
@@ -564,15 +1016,136 @@
       </div>
     </div>
 
+    <!-- Frame Calculator Section -->
+    <div id="calculator-view" class="section">
+      <div class="content">
+        <div class="frame-calculator">
+          <div class="section-header">Calculadora de Frames</div>
+          
+          <div class="calculator-card">
+            <div class="calc-section">
+              <label class="calc-label">Seu Move</label>
+              <div class="calc-inputs">
+                <div class="input-group">
+                  <label>Startup</label>
+                  <input type="number" id="your-startup" placeholder="0" min="0" />
+                  <span class="input-suffix">f</span>
+                </div>
+                <div class="input-group">
+                  <label>On Hit</label>
+                  <input type="number" id="your-onhit" placeholder="0" />
+                  <span class="input-suffix">f</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="calc-divider"></div>
+
+            <div class="calc-section">
+              <label class="calc-label">Move do Oponente</label>
+              <div class="calc-inputs">
+                <div class="input-group">
+                  <label>Startup</label>
+                  <input type="number" id="opp-startup" placeholder="0" min="0" />
+                  <span class="input-suffix">f</span>
+                </div>
+                <div class="input-group">
+                  <label>On Block</label>
+                  <input type="number" id="opp-onblock" placeholder="0" />
+                  <span class="input-suffix">f</span>
+                </div>
+              </div>
+            </div>
+
+            <button class="calc-button" id="calculate-btn">CALCULAR</button>
+            <button class="calc-button-secondary" id="clear-calc-btn">LIMPAR</button>
+
+            <div id="calc-result" class="calc-result" style="display: none;">
+              <div class="result-content">
+                <div class="result-icon" id="result-icon">■</div>
+                <div class="result-text" id="result-text"></div>
+                <div class="result-explanation" id="result-explanation"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-help">
+            <p><strong>Como usar:</strong></p>
+            <p>• <strong>Startup:</strong> Frames até o golpe sair</p>
+            <p>• <strong>On Hit:</strong> Vantagem quando acerta (+) ou desvantagem (-)</p>
+            <p>• <strong>On Block:</strong> Vantagem quando bloqueado (+) ou desvantagem (-)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Combo Trials Section -->
+    <div id="combos-view" class="section">
+      <div class="search-container" style="position: sticky; top: 112px">
+        <div class="search-box">
+          <span class="material-icons">search</span>
+          <input
+            type="text"
+            id="combo-search"
+            placeholder="Buscar personagem..."
+          />
+        </div>
+      </div>
+
+      <div class="content" id="combos-container">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+
+    <!-- Matchup Helper Section -->
+    <div id="matchup-view" class="section">
+      <div class="content">
+        <div class="matchup-selector">
+          <div class="section-header">Matchup Helper</div>
+          
+          <div class="selector-card">
+            <div class="selector-group">
+              <label class="selector-label">Você joga com:</label>
+              <select id="your-character" class="char-select">
+                <option value="">Selecione...</option>
+              </select>
+            </div>
+
+            <div class="vs-divider">VS</div>
+
+            <div class="selector-group">
+              <label class="selector-label">Contra:</label>
+              <select id="opp-character" class="char-select">
+                <option value="">Selecione...</option>
+              </select>
+            </div>
+
+            <button class="matchup-button" id="find-matchup-btn">BUSCAR MATCHUP</button>
+          </div>
+        </div>
+
+        <div id="matchup-result" class="matchup-result" style="display: none;">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+
     <!-- Bottom Navigation -->
     <nav class="bottom-nav">
       <a href="#" class="nav-item active" data-view="glossary">
-        <span class="material-icons">menu_book</span>
-        <span>Termos</span>
+        <span class="material-icons">TERMOS</span>
       </a>
       <a href="#" class="nav-item" data-view="framedata">
-        <span class="material-icons">table_chart</span>
-        <span>Frame Data</span>
+        <span class="material-icons">FDATA</span>
+      </a>
+      <a href="#" class="nav-item" data-view="calculator">
+        <span class="material-icons">CALC</span>
+      </a>
+      <a href="#" class="nav-item" data-view="combos">
+        <span class="material-icons">COMBOS</span>
+      </a>
+      <a href="#" class="nav-item" data-view="matchup">
+        <span class="material-icons">MATCH</span>
       </a>
     </nav>
 
@@ -889,6 +1462,400 @@
         clearTimeout(fdTimeout);
         fdTimeout = setTimeout(() => renderFrameData(e.target.value), 300);
       });
+
+      // ===== FRAME CALCULATOR =====
+      document.getElementById('calculate-btn').addEventListener('click', calculateFrames);
+      document.getElementById('clear-calc-btn').addEventListener('click', clearCalculator);
+
+      function calculateFrames() {
+        const yourStartup = parseInt(document.getElementById('your-startup').value) || 0;
+        const yourOnHit = parseInt(document.getElementById('your-onhit').value) || 0;
+        const oppStartup = parseInt(document.getElementById('opp-startup').value) || 0;
+        const oppOnBlock = parseInt(document.getElementById('opp-onblock').value) || 0;
+
+        const yourAdvantage = yourOnHit;
+        const oppAdvantage = oppOnBlock;
+        const frameAdvantage = yourAdvantage - oppStartup;
+
+        const resultDiv = document.getElementById('calc-result');
+        const resultIcon = document.getElementById('result-icon');
+        const resultText = document.getElementById('result-text');
+        const resultExplanation = document.getElementById('result-explanation');
+
+        resultDiv.style.display = 'block';
+
+        if (frameAdvantage > 0) {
+          resultIcon.textContent = '✅';
+          resultIcon.style.color = '#4caf50';
+          resultText.textContent = `Você tem +${frameAdvantage} frames`;
+          resultText.style.color = '#4caf50';
+          resultExplanation.textContent = 'Sua vez de atacar! Você está em vantagem.';
+        } else if (frameAdvantage < 0) {
+          resultIcon.textContent = '❌';
+          resultIcon.style.color = '#f44336';
+          resultText.textContent = `Você está ${Math.abs(frameAdvantage)} frames em desvantagem`;
+          resultText.style.color = '#f44336';
+          resultExplanation.textContent = 'Oponente pode te punir. Defenda ou recue!';
+        } else {
+          resultIcon.textContent = '⚖️';
+          resultIcon.style.color = '#ffc107';
+       resultText.textContent = 'Neutro (0 frames)';
+          resultText.style.color = '#ffc107';
+          resultExplanation.textContent = 'Ambos podem agir ao mesmo tempo.';
+        }
+      }
+
+      function clearCalculator() {
+        document.getElementById('your-startup').value = '';
+        document.getElementById('your-onhit').value = '';
+        document.getElementById('opp-startup').value = '';
+        document.getElementById('opp-onblock').value = '';
+        document.getElementById('calc-result').style.display = 'none';
+      }
+
+      // ===== COMBO TRIALS DATABASE =====
+      const combosData = {
+        ryu: {
+          name: 'Ryu',
+          combos: [
+            { name: 'Basic BnB', difficulty: 'beginner', damage: 2800, meter: 0, notation: 'cr.MK > 236P > 623P', notes: 'Hitconfirm básico do neutral' },
+            { name: 'Corner Combo', difficulty: 'intermediate', damage: 3200, meter: 1, notation: 'j.HP > st.HP > 236236P', notes: 'Combo de canto com super' },
+            { name: 'Drive Rush Combo', difficulty: 'intermediate', damage: 3500, meter: 2, notation: 'DR > st.MP > st.HP > 236HP > 623HP', notes: 'Combo avançado com DR' },
+            { name: 'Max Punish', difficulty: 'advanced', damage: 4200, meter: 3, notation: 'st.HP > 214214P > CARC', notes: 'Punish máximo com Level 3' }
+          ]
+        },
+        ken: {
+          name: 'Ken',
+          combos: [
+            { name: 'Basic BnB', difficulty: 'beginner', damage: 2900, meter: 0, notation: 'cr.MK > 236K > 623P', notes: 'Combo básico de confirmação' },
+            { name: 'Dragonlash Combo', difficulty: 'intermediate', damage: 3400, meter: 1, notation: '63214K > 236236P', notes: 'Combo após dragonlash' },
+            { name: 'Advanced DR', difficulty: 'advanced', damage: 3800, meter: 2, notation: 'DR > st.MP > cr.HP > 236HK > 623HP', notes: 'Combo técnico com DR' }
+          ]
+        },
+        luke: {
+          name: 'Luke',
+          combos: [
+            { name: 'Flash Knuckle BnB', difficulty: 'beginner', damage: 3000, meter: 0, notation: 'st.MP > st.HP > 236P', notes: 'Combo simples e consistente' },
+            { name: 'Nuke Loop', difficulty: 'advanced', damage: 4000, meter: 2, notation: 'DR > st.HP > 623P > DR > st.HP > 236P', notes: 'Loop avançado com múltiplos DRs' }
+          ]
+        },
+        chunli: {
+          name: 'Chun-Li',
+          combos: [
+            { name: 'Lightning Legs', difficulty: 'beginner', damage: 2700, meter: 0, notation: 'cr.MK > 22K', notes: 'Combo básico com legs' },
+            { name: 'Kikoken Setup', difficulty: 'intermediate', damage: 3300, meter: 1, notation: '236P > DR > st.MK > 214214K', notes: 'Setup com kikoken' },
+            { name: 'Tensho Loop', difficulty: 'advanced', damage: 3900, meter: 2, notation: 'st.HP > DR > j.HP > 623P > DR', notes: 'Loop difícil mas muito damage' }
+          ]
+        },
+        guile: {
+          name: 'Guile',
+          combos: [
+            { name: 'Sonic Boom BnB', difficulty: 'beginner', damage: 2600, meter: 0, notation: 'Hold[4] > 6P > cr.MK > Flash Kick', notes: 'Clássico do Guile' },
+            { name: 'Somersault Combo', difficulty: 'intermediate', damage: 3100, meter: 1, notation: 'cr.HP > 28K > 214214P', notes: 'Combo com super' }
+          ]
+        },
+        juri: {
+          name: 'Juri',
+          combos: [
+            { name: 'Fuha Store BnB', difficulty: 'beginner', damage: 2850, meter: 0, notation: 'cr.MK > 236MK (release) > 623K', notes: 'Combo usando fuha stores' },
+            { name: 'Install Combo', difficulty: 'advanced', damage: 4100, meter: 3, notation: '214214K > st.HP > DR > full combo', notes: 'Combo durante install' }
+          ]
+        },
+        jamie: {
+          name: 'Jamie',
+          combos: [
+            { name: 'Drink Level 0', difficulty: 'beginner', damage: 2650, meter: 0, notation: 'cr.MK > 236P > 623P', notes: 'BnB sem drink stacks' },
+            { name: 'Drink Level 4', difficulty: 'intermediate', damage: 3600, meter: 1, notation: 'st.HP > 214P > 236236P', notes: 'Alto damage com max drinks' }
+          ]
+        },
+        marisa: {
+          name: 'Marisa',
+          combos: [
+            { name: 'Gladius BnB', difficulty: 'beginner', damage: 3200, meter: 0, notation: 'st.HP > 623P', notes: 'Simples mas muito dano' },
+            { name: 'Charged Combo', difficulty: 'intermediate', damage: 3800, meter: 1, notation: '[st.HP] > 623[P] > 236236P', notes: 'Combo com charged moves' }
+          ]
+        },
+        manon: {
+          name: 'Manon',
+          combos: [
+            { name: 'Medal Level 0', difficulty: 'beginner', damage: 2550, meter: 0, notation: 'cr.MK > 236P', notes: 'Combo sem medals' },
+            { name: 'Medal Level 5', difficulty: 'advanced', damage: 4300, meter: 2, notation: 'st.HP > 236P > 236236K', notes: 'Max medal command grab' }
+          ]
+        },
+        deejay: {
+          name: 'Dee Jay',
+          combos: [
+            { name: 'Rhythm BnB', difficulty: 'beginner', damage: 2750, meter: 0, notation: 'cr.MK > 236P > 236P', notes: 'Sequência ritmada' },
+            { name: 'Jackpot', difficulty: 'intermediate', damage: 3450, meter: 1, notation: 'st.HP > DR > 214214K', notes: 'Super de canto' }
+          ]
+        },
+        cammy: {
+          name: 'Cammy',
+          combos: [
+            { name: 'Spiral Arrow', difficulty: 'beginner', damage: 2850, meter: 0, notation: 'cr.MK > 236K > 623P', notes: 'Combo veloz e eficiente' },
+            { name: 'Cannon Strike', difficulty: 'intermediate', damage: 3350, meter: 1, notation: 'j.214K > st.MP > cr.HP > 236236K', notes: 'Pressure aérea' },
+            { name: 'Hooligan Setup', difficulty: 'advanced', damage: 3700, meter: 2, notation: 'DR > 236P > j.214K > combo', notes: 'Mix-up avançado' }
+          ]
+        },
+        lily: {
+          name: 'Lily',
+          combos: [
+            { name: 'Condor Spire', difficulty: 'beginner', damage: 2700, meter: 0, notation: 'cr.MK > 236P > 623P', notes: 'Combo básico com spire' },
+            { name: 'Wind Stock', difficulty: 'intermediate', damage: 3250, meter: 1, notation: '[236P] > st.HP > 214214P', notes: 'Usa wind stocks' }
+          ]
+        },
+        jp: {
+          name: 'JP',
+          combos: [
+            { name: 'Torbalan', difficulty: 'beginner', damage: 2600, meter: 0, notation: 'cr.MK > 236P (hold)', notes: 'Zoning combo' },
+            { name: 'Departure', difficulty: 'intermediate', damage: 3400, meter: 1, notation: 'st.HP > 623P > 236236P', notes: 'Setup com teleport' }
+          ]
+        },
+        kimberly: {
+          name: 'Kimberly',
+          combos: [
+            { name: 'Spray Mix', difficulty: 'beginner', damage: 2800, meter: 0, notation: 'cr.MK > 236P > 623K', notes: 'Ninja rush combo' },
+            { name: 'Teleport Pressure', difficulty: 'advanced', damage: 3600, meter: 2, notation: '214K > st.MP > DR > 236236K', notes: 'Mix-up com teleport' }
+          ]
+        },
+        zangief: {
+          name: 'Zangief',
+          combos: [
+            { name: 'SPD Setup', difficulty: 'beginner', damage: 3100, meter: 0, notation: 'st.LP > 360P', notes: 'Command grab básico' },
+            { name: 'Double Lariat', difficulty: 'intermediate', damage: 3500, meter: 1, notation: 'st.HP > PPP > 720P', notes: 'Sequência de grabs' }
+          ]
+        },
+        dhalsim: {
+          name: 'Dhalsim',
+          combos: [
+            { name: 'Yoga Fire', difficulty: 'beginner', damage: 2500, meter: 0, notation: 'st.MP > 236P > 236P', notes: 'Zoning combo' },
+            { name: 'Teleport Mix', difficulty: 'intermediate', damage: 3000, meter: 1, notation: '623PPP > st.HP > 236236P', notes: 'Teleport setup' }
+          ]
+        },
+        blanka: {
+          name: 'Blanka',
+          combos: [
+            { name: 'Rolling Attack', difficulty: 'beginner', damage: 2700, meter: 0, notation: 'cr.MK > Hold[4]6P', notes: 'Combo com roll' },
+            { name: 'Electric Thunder', difficulty: 'intermediate', damage: 3200, meter: 1, notation: 'st.HP > 236236P', notes: 'Super elétrico' }
+          ]
+        },
+        ehonda: {
+          name: 'E. Honda',
+          combos: [
+            { name: 'Hundred Hand', difficulty: 'beginner', damage: 2900, meter: 0, notation: 'cr.MK > PPP (tap)', notes: 'Clássico do Honda' },
+            { name: 'Sumo Headbutt', difficulty: 'intermediate', damage: 3400, meter: 1, notation: 'st.HP > Hold[2]8P > 236236P', notes: 'Combo aéreo' }
+          ]
+        }
+      };
+
+      let currentCharacter = null;
+
+      function renderCharacterList() {
+        const container = document.getElementById('combos-container');
+        container.innerHTML = '';
+
+        Object.keys(combosData).forEach(charKey => {
+          const char = combosData[charKey];
+          const charItem = document.createElement('div');
+          charItem.className = 'char-list-item';
+          charItem.innerHTML = `
+            <div class="char-icon">${char.name[0]}</div>
+            <div class="char-name">${char.name}</div>
+            <div class="char-combo-count">${char.combos.length} combos</div>
+          `;
+          charItem.addEventListener('click', () => showCharacterCombos(charKey));
+          container.appendChild(charItem);
+        });
+      }
+
+      function showCharacterCombos(charKey) {
+        const container = document.getElementById('combos-container');
+        const char = combosData[charKey];
+        currentCharacter = charKey;
+
+        container.innerHTML = `<div class="section-header" style="cursor: pointer;" onclick="renderCharacterList()">← ${char.name} - Combos</div>`;
+
+        char.combos.forEach(combo => {
+          const comboCard = document.createElement('div');
+          comboCard.className = 'combo-card';
+          comboCard.innerHTML = `
+            <div class="combo-header">
+              <div class="combo-name">${combo.name}</div>
+              <div class="combo-difficulty difficulty-${combo.difficulty}">${combo.difficulty}</div>
+            </div>
+            <div class="combo-notation">${combo.notation}</div>
+            <div class="combo-stats">
+              <div class="combo-stat">💥 Dano: ${combo.damage}</div>
+              <div class="combo-stat">⚡ Meter: ${combo.meter}</div>
+            </div>
+            <div class="combo-notes">${combo.notes}</div>
+          `;
+          container.appendChild(comboCard);
+        });
+      }
+
+      // Combo search
+      document.getElementById('combo-search').addEventListener('input', (e ) => {
+        const query = e.target.value.toLowerCase().trim();
+        if (!query) {
+          renderCharacterList();
+          return;
+        }
+
+        const container = document.getElementById('combos-container');
+        container.innerHTML = '';
+
+        Object.keys(combosData).forEach(charKey => {
+          const char = combosData[charKey];
+          if (char.name.toLowerCase().includes(query)) {
+            const charItem = document.createElement('div');
+            charItem.className = 'char-list-item';
+            charItem.innerHTML = `
+              <div class="char-icon">${char.name[0]}</div>
+              <div class="char-name">${char.name}</div>
+              <div class="char-combo-count">${char.combos.length} combos</div>
+            `;
+            charItem.addEventListener('click', () => showCharacterCombos(charKey));
+            container.appendChild(charItem);
+          }
+        });
+
+        if (container.innerHTML === '') {
+          container.innerHTML = '<div class="empty-state"><span class="material-icons">search_off</span><p>Nenhum personagem encontrado</p></div>';
+        }
+      });
+
+      renderCharacterList();
+
+      // ===== MATCHUP HELPER =====
+      const matchupData = [
+        {
+          yourChar: 'ryu', vsChar: 'ken', difficulty: 5,
+          overview: 'Matchup equilibrado com ligeira vantagem para Ryu no neutral.',
+          strengths: ['Ryu tem melhor zoning com hadouken', 'cr.MK mais longo que Ken', 'Mais seguro em pokes'],
+          weaknesses: ['Ken tem melhor oki', 'Dragonlash é perigoso', 'Ken causa mais dano em shimmy'],
+          keyMoves: [
+            { move: 'st.HP', why: 'Melhor anti-air contra j.HP do Ken' },
+            { move: 'cr.MK', why: 'Outrange normals do Ken no footsies' }
+          ],
+          strategy: 'Jogar no mid-range, usar hadouken para forçar aproximação. Punir dragonlash com throw ou shimmy. Cuidado com o oki do Ken após knockdown.'
+        },
+        {
+          yourChar: 'ryu', vsChar: 'luke', difficulty: 6,
+          overview: 'Matchup difícil. Luke tem vantagem em quase todos os ranges.',
+          strengths: ['Hadouken pode zoneá-lo de longe', 'Ryu tem melhores reversals'],
+          weaknesses: ['Luke domina mid-range', 'Flash Knuckle muito forte', 'Luke causa muito mais dano'],
+          keyMoves: [
+            { move: 'Hadouken', why: 'Única ferramenta para manter distância' },
+            { move: 'DP', why: 'Essencial para escapar pressão' }
+          ],
+          strategy: 'Evitar mid-range a todo custo. Ficar fora do alcance do Flash Knuckle. Usar hadouken para controlar ritmo. Não deixar Luke entrar.'
+        },
+        {
+          yourChar: 'ken', vsChar: 'ryu', difficulty: 5,
+          overview: 'Matchup equilibrado com ligeira vantagem para Ken no pressure.',
+          strengths: ['Melhor oki e  pressure', 'Dragonlash é forte', 'Mais dano em shimmy e combos'],
+          weaknesses: ['Ryu zoneia melhor', 'cr.MK do ryu é mais longo', 'Ryu mais seguro no neutral'],
+          keyMoves: [
+            { move: 'Dragonlash', why: 'Quebra zoning do Ryu' },
+            { move: 'DR Run', why: 'Approach seguro' }
+          ],
+          strategy: 'Usar Dragonlash para passar pelos hadoukens. Focar em knockdowns para aproveitar oki superior. Shimmy é muito forte nesse matchup.'
+        }
+      ];
+
+      const characters = ['ryu', 'ken', 'luke', 'chunli', 'guile', 'juri'];
+      const charNames = {
+        ryu: 'Ryu', ken: 'Ken', luke: 'Luke',
+        chunli: 'Chun-Li', guile: 'Guile', juri: 'Juri'
+      };
+
+      // Populate character selects
+      characters.forEach(char => {
+        const option1 = document.createElement('option');
+        option1.value = char;
+        option1.textContent = charNames[char];
+        document.getElementById('your-character').appendChild(option1);
+
+        const option2 = document.createElement('option');
+        option2.value = char;
+        option2.textContent = charNames[char];
+        document.getElementById('opp-character').appendChild(option2);
+      });
+
+      document.getElementById('find-matchup-btn').addEventListener('click', findMatchup);
+
+      function findMatchup() {
+        const yourChar = document.getElementById('your-character').value;
+        const oppChar = document.getElementById('opp-character').value;
+
+        if (!yourChar || !oppChar) {
+          alert('Selecione ambos os personagens');
+          return;
+        }
+
+        if (yourChar === oppChar) {
+          alert('Selecione personagens diferentes');
+          return;
+        }
+
+        const matchup = matchupData.find(m =>
+          m.yourChar === yourChar && m.vsChar === oppChar
+        );
+
+        const resultDiv = document.getElementById('matchup-result');
+
+        if (!matchup) {
+          resultDiv.innerHTML = '<div class="empty-state"><span class="material-icons">search_off</span><p>Matchup não encontrado. Dados em breve!</p></div>';
+          resultDiv.style.display = 'block';
+          return;
+        }
+
+        const difficultyDots = Array(10).fill(0).map((_, i) =>
+          `<div class="difficulty-dot ${i < matchup.difficulty ? 'filled' : ''}"></div>`
+        ).join('');
+
+        resultDiv.innerHTML = `
+          <div class="matchup-header">
+            <div class="matchup-title">${charNames[yourChar]} vs ${charNames[oppChar]}</div>
+            <div>Dificuldade: ${matchup.difficulty}/10</div>
+            <div class="difficulty-bar">${difficultyDots}</div>
+          </div>
+
+          <div class="matchup-section">
+            <div class="section-title">📊 Visão Geral</div>
+            <p class="strategy-text">${matchup.overview}</p>
+          </div>
+
+          <div class="matchup-section">
+            <div class="section-title">✅ Seus Pontos Fortes</div>
+            <ul>
+              ${matchup.strengths.map(s => `<li>${s}</li>`).join('')}
+            </ul>
+          </div>
+
+          <div class="matchup-section">
+            <div class="section-title">⚠️ Pontos Fracos</div>
+            <ul>
+              ${matchup.weaknesses.map(w => `<li>${w}</li>`).join('')}
+            </ul>
+          </div>
+
+          <div class="matchup-section">
+            <div class="section-title">🎯 Moves Essenciais</div>
+            <ul>
+              ${matchup.keyMoves.map(km => `<li><strong>${km.move}:</strong> ${km.why}</li>`).join('')}
+            </ul>
+          </div>
+
+          <div class="matchup-section">
+            <div class="section-title">💡 Estratégia</div>
+            <p class="strategy-text">${matchup.strategy}</p>
+          </div>
+        `;
+
+        resultDiv.style.display = 'block';
+      }
     </script>
   </body>
 </html>
